@@ -1,0 +1,70 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ribhubai"
+		},
+		"CollaborationData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CollaborationData'"
+		},
+		"ribgenlakeconnection_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ribgenlakeconnection'"
+		},
+		"ribgenlakeconnection_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://ribrawdata.dfs.core.windows.net/"
+		},
+		"BlobUpdatedTrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd5beeea-6d0b-47c1-8d3d-75dd692ea84f/resourceGroups/RG-AI-POC/providers/Microsoft.Storage/storageAccounts/datacollectionpoint"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ribhubai_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"CollaborationData_connectionString": {
+						"value": "[parameters('CollaborationData_connectionString')]"
+					},
+					"ribgenlakeconnection_accountKey": {
+						"value": "[parameters('ribgenlakeconnection_accountKey')]"
+					},
+					"ribgenlakeconnection_properties_typeProperties_url": {
+						"value": "[parameters('ribgenlakeconnection_properties_typeProperties_url')]"
+					},
+					"BlobUpdatedTrigger_properties_typeProperties_scope": {
+						"value": "[parameters('BlobUpdatedTrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
