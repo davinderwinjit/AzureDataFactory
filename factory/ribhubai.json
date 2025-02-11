@@ -1,0 +1,9 @@
+{
+	"name": "ribhubai",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e13df9af-ef8a-4f03-956e-bd84efd0fc1f",
+		"tenantId": "44738343-a364-4d50-ae42-2ab9b0724b4d"
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"name": "BlobUpdatedTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "BlobCopyData",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/collaboration/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/dd5beeea-6d0b-47c1-8d3d-75dd692ea84f/resourceGroups/RG-AI-POC/providers/Microsoft.Storage/storageAccounts/datacollectionpoint",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}
